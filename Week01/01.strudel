@@ -1,5 +1,1 @@
-// sound("bd:4 [hh hh] sd [sd sd oh]").bank("RolandTR808")
-// sound("bd hh sd oh")
-// sound("bd hh sd oh").bank("RolandTR808")
-// sound("bd [hh hh] sd [hh bd] bd ~ [hh sd] cp").bank("RolandTR808")
 s("bd:6 [hh hh] sd:1 [hh bd] bd ~ [hh sd]*4 cp").bank("RolandTR808")
