@@ -1,15 +1,42 @@
-// @title W01-05
-// @license CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
-// @by vigliensoni
-// @date Jan 5, 2026
+// Variation 2: Ambient/Spacious
+setcps(97/60/4)
 
-// 5
-setcps(150/60/4)
-d1: s("bongo:1").euclid(3,8).off(1/4, add(2)).delay(0.025).pan(0)
-d2: s("bongo:2").euclid(5,8).off(1/4, add(2)).delay(0.025).pan(1)
-// d3: s("bongo:12").euclid(6,8).pan(sine)
-d4: s("hh:3*4").gain(0.125)
-$: s("east:0*4").gain(0.125)
-$: s("east:2*8").gain(0.0325)
+let kick = s("bd(2,8)")
+  .lpf(45)
+  .gain(1.1)
+  .room(0.5)
 
-d3: s("bongo*8").n(irand(10))
+let pulse = s("bd:18(3,16)")
+  .speed(0.35)
+  .lpf(35)
+  .gain(sine.slow(16).range(0.2, 0.8))
+
+let metallic = s("hh(5,12)")
+  .speed(1.5)
+  .hpf(4000)
+  .gain(0.2)
+  .pan(sine.slow(7))
+  .delay(0.7).delaytime(1.25).delayfeedback(0.75)
+
+let ghost = s("sd(3,13)")
+  .speed(0.8)
+  .gain(0.15)
+  .room(0.9)
+  .slow(3.141)  // π
+
+let texture = s("perc:11(7,16)")
+  .rarely(x => x.speed(0.125))
+  .gain(sine.slow(32).range(0, 0.35))
+  .delay(0.8).delaytime(1.5).delayfeedback(0.8)
+
+let drift = s("cp(2,19)")
+  .speed(0.6)
+  .gain(0.1)
+  .room(0.95)
+  .delay(0.9).delaytime(2).delayfeedback(0.85)
+  .slow(2.718)  // e
+
+stack(kick, pulse, metallic, ghost, texture, drift)
+  .bank("RolandTR909")
+  .shape(0.08)
+  .room(0.6)
