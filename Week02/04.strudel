@@ -1,0 +1,8 @@
+// Template for periodic transformation
+
+setcps(130/60/4)
+
+s("bd(3,8)")
+  .every(4, x => x.fast(2))      // Density Burst: every 4 cycles, play twice as fast
+  .every(3, x => x.speed(1.5))  // Tonal Shift: every 3 cycles, increase playback speed
+  .every(6, x => x.ply(2))      // Repetition: every 6 cycles, repeat each hit
