@@ -1,0 +1,40 @@
+// Adding randomness to last weeks patch
+
+setcps(127/60/4)
+
+// 1. Probabilistic Triggering: Added ?0.1 so the kick rarely misses a hit [3]
+let kick = s("bd(3,8)?0.1")
+  .speed(0.7)
+  .lpf(70)
+  .gain(1.4)
+
+// 2. Alternation: Added | to randomly choose between two bass drum samples [4]
+let pulse = s("[bd:15|bd:14](5,16)")
+  .speed(0.5)
+  .lpf(40)
+  .gain(sine.slow(8).range(0.4, 1.2))
+
+// 3. Thinning: Added ? to give the hi-hats a 50% chance of playing each hit [3]
+let metallic = s("hh(7,12)?")
+  .speed(2)
+  .hpf(6000)
+  .gain(0.35)
+  .pan(sine.slow(3))
+  .delay(0.4).delayfeedback(0.6)
+
+// 4. Sometimes: Added .sometimes to occasionally double the hits (ply) [5]
+let ghost = s("sd(5,13)")
+  .sometimes(x => x.ply(2))
+  .speed(1.5)
+  .gain(0.3)
+  .room(0.7)
+  .slow(1.618)
+
+let texture = s("perc:9(11,16)")
+  .rarely(x => x.speed(0.25)) // Already using a probability function! [5]
+  .gain(sine.slow(16).range(0, 0.5))
+  .delay(0.5).delaytime(0.75).delayfeedback(0.7)
+
+stack(kick, pulse, metallic, ghost, texture)
+  .bank("RolandTR909")
+  .shape(0.15)
