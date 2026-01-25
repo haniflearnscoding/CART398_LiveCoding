@@ -1,0 +1,24 @@
+// Layered Periodic Transformation
+
+setcps(127/60/4)
+
+let kick = s("bd(3,8)?0.1").speed(0.7).lpf(70).gain(1.4)
+let pulse = s("[bd:15|bd:14](5,16)").speed(0.5).lpf(40).gain(sine.slow(8).range(0.4, 1.2))
+let metallic = s("hh(7,12)?").speed(2).hpf(6000).gain(0.35).pan(sine.slow(3))
+let ghost = s("sd(5,13)").sometimes(x => x.ply(2)).speed(1.5).gain(0.3).room(0.7)
+let texture = s("perc:9(11,16)").rarely(x => x.speed(0.25)).gain(sine.slow(16).range(0, 0.5))
+
+stack(kick, pulse, metallic, ghost, texture)
+  .bank("RolandTR909")
+  .shape(0.15)
+  // 1. Density Burst: Every 4 cycles, the whole stack plays twice as fast [2, 4]
+  .every(4, x => x.fast(2))
+
+  // 2. Tonal Mutation: Every 3 cycles, shift the speed/pitch higher [2]
+  .every(3, x => x.speed(1.25))
+
+  // 3. Structural "Breathing": Every 6 cycles, apply a mask to thin the texture [4, 5]
+  .every(6, x => x.mask("<1 1 0 1 0 1>"))
+
+  // 4. Temporal Displacement: Occasionally shift the timing for a "swing" feel [4]
+  .often(x => x.late(0.05))
