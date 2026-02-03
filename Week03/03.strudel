@@ -1,0 +1,12 @@
+setcps(90/60/4)
+samples('github:tidalcycles/dirt-samples')
+
+stack(
+  // ICA 1: Your Beat
+  s("bd <sd!3 [sd*2]> bd? cp"),
+
+  // ICA 3: Your Melody
+  note("60 ~ 65 <67 70>")
+    .s("vibraphone_soft")
+    .gain(0.8)
+)
