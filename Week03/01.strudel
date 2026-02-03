@@ -1,0 +1,17 @@
+// 1. Set the global tempo (Cycles Per Second)
+setcps(90/60/4) // Standard tempo for the perreito exercise [1, 2]
+
+// 2. Load the sample libraries
+samples('github:concordia-dcart/samples-extra') // [1]
+samples('github:tidalcycles/dirt-samples')      // [1, 3]
+
+// 3. Beat Construction
+stack(
+  // Approach 1: Using a loop with division
+  s("perre-loop/2"), // [1]
+
+  // Approach 2: Manual sequencing with individual hits
+  // Use < > for alternation or ? for probability
+  s("bd <sd!3 sd*2> bd? cp") // [4]
+    .gain(0.7)
+)
