@@ -1,0 +1,25 @@
+// 1. Set the 'Engine Speed'
+setcps(110/60/4)
+
+// 2. Load airy and digital libraries
+samples('github:tidalcycles/dirt-samples', 'github:concordia-dcart/samples-extra')
+
+stack(
+  // LAYER 1: "Limited Raycasting" (Note Names)
+  // 'striate' creates a shimmering, low-res bitmap texture [4]
+  // '?' creates flickering visibility like a limited light source [5]
+  note("<c4 eb4 f4 bb3>?")
+    .s("vibraphone_soft")
+    .striate(32)
+    .gain(0.7)
+    .pan(rand), // Simulates shifting RGB light positions
+
+  // LAYER 2: "RGB Pulse" (Integer and Float Numbers)
+  // Float numbers (62.5) provide dissonant, microtonal shifts [3]
+  // 'euclid' provides the rhythmic heartbeat of the game engine [5]
+  note("60 62.5? 65.8 67")
+    .s("newnotes")
+    .euclid(3, 8)
+    .delay(0.4)
+    .gain(0.5)
+)
