@@ -1,0 +1,20 @@
+setcps(90/60/4)
+samples('github:tidalcycles/dirt-samples', 'github:concordia-dcart/samples-extra')
+
+stack(
+  // Melody 1: "Ghostly" textures using Note Names
+  // Using 'striate' for breathy, granular movement
+  note("<c4 eb4 g4 bb4>?")
+    .s("vibraphone_soft")
+    .striate(16)      // Cuts sample into 16 parts for a ghostly feel [3]
+    .gain(0.7)
+    .rev(),           // Reverses for an eerie effect [4]
+
+  // Melody 2: "Pulse" using Integer and Float Numbers
+  // Float numbers (62.5) create microtonal, haunting dissonances
+  note("60 62.5 67 65.2")
+    .s("harp")        // A more resonant, pulsing sound [2]
+    .delay(0.8)       // Adds echo-like pulsing
+    .gain(0.6)
+    .euclid(3, 8)     // Creates a pulsing Euclidean rhythm [4]
+)
