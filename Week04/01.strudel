@@ -1,0 +1,8 @@
+setcps(110/60/4)
+samples('github:tidalcycles/dirt-samples')
+$: note("<c4 eb4 f4 bb3>*<1 2 4>").s("vibraphone_soft")
+  .striate("<16 32 64>").gain(0.4).pan(rand).o(irand(3))
+// Drone layer
+$: note("c2").s("bass").sustain(4).room(0.9).size(0.9).gain(0.4)
+// Moving bass every 2 cycles
+$: note("<c2 eb2 f2 bb1>").s("bass").slow(2)
