@@ -1,0 +1,18 @@
+setcps(150/60/4) // ~150 BPM
+
+samples('github:tidalcycles/dirt-samples')
+
+// Hard kicks
+$: s("bd*4").gain(1.2)
+
+// Snares
+$: s("~ sn ~ sn").gain(1.0)
+
+// Hi-hats
+$: s("hh*8").gain(0.6).pan(rand)
+
+// Bass
+$: s("bass3:[0,2,5,7]").slow(2).gain(1.0)
+
+// Melodic element
+$: s("arpy*4").note("<0 3 7 10>").speed(2).gain(0.7)
