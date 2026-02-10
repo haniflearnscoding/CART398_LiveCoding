@@ -1,0 +1,38 @@
+// Bad Bunny - Perreo Style
+setcps(92/60/4)
+
+samples('github:tidalcycles/dirt-samples')
+
+// Dembow riddim - the reggaeton backbone
+$: s("bd ~ ~ [~ rim] ~ bd [~ rim] ~")
+  .ply("<1 1 1 2>")
+
+// 808 sub bass - slides between minor key notes
+$: note("<c2 c2 eb2 bb1>")
+  .s("bass:3")
+  .slow(2)
+  .gain(1.0)
+  .lpf(180)
+  .sustain(2)
+  .ply(2)
+
+// Trap hi-hats - triplet rolls
+$: s("hh*8")
+  .gain(".4 .3 .5 .3 .4 .3 .6 .3")
+  .sometimes(x => x.fast(3))
+  .pan(rand)
+
+// Claps on the offbeat
+$: s("~ cp ~ cp")
+  .gain(0.7)
+  .room(0.3)
+  .sometimes(x => x.ply(3))
+  .gain(0.7)
+
+// Dark synth stab - short choppy hits
+$: note("<c4 [eb4 ~] g4 [bb3 ~]>")
+  .s("sawtooth")
+  .lpf(900)
+  .gain(0.35)
+  .sustain(0.1)
+  .degradeBy(0.25)
