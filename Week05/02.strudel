@@ -1,0 +1,73 @@
+// Mexican OT - Chopped & Screwed. Syrup music.
+setcps(62/60/4)
+
+// === KICK: slow, heavy, room-shaking ===
+let kick = s("bd:5 ~ ~ ~ bd:5 ~ ~ ~")
+  .gain(.95).shape(.4)
+  .room(.15)
+
+// === CLAP: dragged, lazy ===
+let clap = s("~ ~ ~ cp ~ ~ ~ cp")
+  .gain(.65).room(.2)
+  .delay(.15).delaytime(.5).delayfeedback(.3)
+
+// === HATS: chopped, stuttered ===
+let hats = s("hh ~ hh ~ hh ~ [hh hh] ~")
+  .gain(".35 .0 .3 .0 .35 .0 .45 .0")
+  .lpf(3500)
+  .delay(.1).delaytime(.25).delayfeedback(.2)
+
+// === 808: long, pitched down, slow slides ===
+let bass = note("~ c1 ~ ~ ~ ~ bb0 ~")
+  .s("triangle")
+  .decay(2).sustain(.4).release(.8)
+  .gain(.9)
+  .shape(.3)
+  .lpf(50)
+
+// === SCREWED MELODY: slow, filtered, drowning ===
+let melody = note("c3 ~ eb3 ~ f3 ~ ~ gb3")
+  .s("sawtooth")
+  .decay(.5).sustain(.15).release(.6)
+  .gain(.22)
+  .lpf(sine.range(200, 800).slow(16))
+  .lpq(3)
+  .shape(.15)
+  .room(.5).size(.7)
+  .delay(.3).delaytime(.5).delayfeedback(.45)
+  .slow(2)
+
+// === CHOPPED VOCAL TEXTURE: stuttered plucks ===
+let chop = s("pluck:3 ~ ~ pluck:3 ~ pluck:3 ~ ~")
+  .gain(.18)
+  .speed(.5)
+  .lpf(600)
+  .room(.4).size(.5)
+  .delay(.2).delaytime(.375).delayfeedback(.35)
+
+// === DRONE: purple haze ===
+let drone = note("<c1 bb0>")
+  .s("sawtooth")
+  .attack(2).decay(3).sustain(.3).release(2)
+  .gain(.1)
+  .lpf(sine.range(60, 200).slow(24))
+  .shape(.1)
+  .room(.6).size(.8)
+  .slow(4)
+
+// === POLYRHYTHM PERC: 3v4, ghostly ===
+let perc3 = s("rim:3*3").gain(.12).room(.2)
+  .delay(.15).delaytime(.33).delayfeedback(.25)
+let perc4 = s("hh:8*4").gain(.1).lpf(2000)
+
+stack(
+  kick,
+  clap,
+  hats,
+  bass,
+  melody,
+  chop,
+  drone,
+  perc3,
+  perc4
+)
