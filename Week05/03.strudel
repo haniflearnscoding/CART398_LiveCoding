@@ -1,0 +1,59 @@
+// Polyrhythmic Algorave Sketch
+setcps(140/60/4)
+
+// === EUCLIDEAN KICK: 5 hits over 16 ===
+let kick = s("bd:2").euclid(5,16)
+  .gain(.4).shape(.3)
+
+// === EUCLIDEAN SNARE: 3 over 8, offset ===
+let snare = s("sd:4").euclid(3,8).late(.125)
+  .gain(.65).room(.1)
+
+// === POLYRHYTHM HATS: 7 against 16 ===
+let hats7 = s("hh:2").euclid(7,16)
+  .gain(.4).lpf(7000)
+let hats5 = s("oh:1").euclid(5,12)
+  .gain(.25).lpf(4000).decay(.08)
+
+// === BASS: euclidean 3 over 8 ===
+let bass = note("c2 eb2 g2 bb2".euclid(3,8))
+  .s("triangle")
+  .decay(.4).sustain(.15).release(.2)
+  .gain(.8)
+  .shape(.25)
+  .lpf(sine.range(80, 400).slow(8))
+
+// === LEAD: 7 over 12, shifting ===
+let lead = note("c4 d4 eb4 g4 bb4 c5 d5".euclid(7,12))
+  .s("square")
+  .decay(.12).sustain(.05).release(.1)
+  .gain(.3)
+  .lpf(sine.range(600, 4000).fast(0.25))
+  .lpq(6)
+  .room(.2)
+  .delay(.2).delaytime(.166).delayfeedback(.35)
+
+// === TEXTURE: 9 over 16, metallic ===
+let texture = note("c5 eb5 f5 g5 bb5".euclid(9,16))
+  .s("triangle")
+  .decay(.05).sustain(0).release(.03)
+  .gain(.15)
+  .lpf(sine.range(1000, 6000).slow(6))
+  .lpq(8)
+  .pan(sine.range(.2,.8).fast(3))
+  .delay(.15).delaytime(.125).delayfeedback(.3)
+
+// === RIM: 4 against everything ===
+let rim = s("rim:2*4").gain(.2)
+  .delay(.1).delaytime(.2).delayfeedback(.2)
+
+stack(
+  kick,
+  snare,
+  hats7,
+  hats5,
+  bass,
+  lead,
+  texture,
+  rim
+).nudge(rand.range(-0.4, 0.4))
