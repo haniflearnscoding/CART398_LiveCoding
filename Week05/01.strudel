@@ -1,18 +1,20 @@
-// Mexican OT - Texas Trap. Dirty south.
+// Mexican OT - Texas Trap. Dirty south. + degradeBy
 setcps(76/60/4)
 
 // === KICK: boom, not beep ===
 let kick = s("bd:5 ~ ~ bd:5 ~ bd:5 ~ ~")
   .gain(.95).shape(.3)
 
-// === SNARE: hard clap ===
+// === SNARE: hard clap, occasional miss ===
 let snare = s("~ ~ cp ~ ~ ~ cp ~").gain(.75)
   .room(.12)
+  .degradeBy(.1)
 
-// === HATS: trap rolls, not ticking clocks ===
+// === HATS: trap rolls, dropping out ===
 let hats = s("hh hh hh hh hh hh [hh hh hh] hh")
   .gain(".45 .3 .4 .3 .45 .3 .55 .3")
   .lpf(6000)
+  .degradeBy(.25)
 
 // === 808 BASS: the whole point ===
 let bass = note("~ c1 ~ ~ ~ eb1 ~ <bb0 c1>")
@@ -22,11 +24,13 @@ let bass = note("~ c1 ~ ~ ~ eb1 ~ <bb0 c1>")
   .shape(.35)
   .lpf(55)
 
-// === POLYRHYTHM PERC: subtle, not musical ===
+// === POLYRHYTHM PERC: subtle, disappearing ===
 let perc3 = s("rim:3*3").gain(.2).room(.08)
+  .degradeBy(.3)
 let perc4 = s("hh:8*4").gain(.18).lpf(3000)
+  .degradeBy(.35)
 
-// === LEAD: gritty, not melodic. filtered saw, not chiptune ===
+// === LEAD: gritty, notes vanishing ===
 let lead = note("c3 eb3 f3 gb3 bb3".euclid(5,8))
   .s("sawtooth")
   .decay(.2).sustain(.05).release(.15)
@@ -35,6 +39,7 @@ let lead = note("c3 eb3 f3 gb3 bb3".euclid(5,8))
   .lpq(4)
   .shape(.2)
   .room(.15)
+  .degradeBy(.2)
 
 // === ATMOSPHERE: dark, not dreamy ===
 let atmos = note("c2")
