@@ -1,0 +1,77 @@
+// French House x Acid x Funk + Probability
+setcps(122/60/4)
+
+// === KICK: four on the floor, punchy ===
+let kick = s("bd:3 bd:3 bd:3 bd:3")
+  .gain(.85).shape(.25)
+
+// === CLAP: 2 and 4 ===
+let clap = s("~ cp ~ cp").gain(.6).room(.12)
+
+// === HATS: disco offbeat + 16ths with dropout ===
+let hats = s("~ oh ~ oh").gain(.3).lpf(5500).decay(.1)
+  .degradeBy(.15)
+let hat16 = s("hh*16").gain(".25 .12 .2 .12 .25 .12 .2 .12 .25 .12 .2 .12 .25 .12 .2 .15")
+  .lpf(6000)
+  .degradeBy(.3)
+
+// === BASS: Da Funk style, repetitive acid line ===
+let bass = note("c2 c2 c2 eb2 ~ c2 bb1 c2")
+  .s("sawtooth")
+  .decay(.25).sustain(.1).release(.1)
+  .gain(.6)
+  .lpf(sine.range(200, 1800).slow(8))
+  .lpq(8)
+  .shape(.2)
+
+// === DISCO CHORDS: filtered, pumping, occasional drops ===
+let chords = note("<[c3,eb3,g3] [bb2,d3,f3] [ab2,c3,eb3] [bb2,d3,f3]>")
+  .s("sawtooth")
+  .attack(.01).decay(.2).sustain(.15).release(.15)
+  .gain(.22)
+  .lpf(sine.range(400, 3500).slow(4))
+  .lpq(3)
+  .room(.2)
+  .degradeBy(.1)
+
+// === ROBOT VOICE: vocoder stabs, glitchy drops ===
+let vocoder = note("c5 ~ eb5 ~ g5 ~ eb5 ~")
+  .s("square")
+  .decay(.08).sustain(.02).release(.05)
+  .gain(.18)
+  .lpf(sine.range(800, 5000).fast(2))
+  .lpq(12)
+  .shape(.1)
+  .delay(.15).delaytime(.125).delayfeedback(.3)
+  .degradeBy(.35)
+
+// === FUNK STAB: One More Time, random gaps ===
+let stab = note("[c4,eb4,g4] ~ ~ ~ [bb3,d4,f4] ~ ~ ~")
+  .s("triangle")
+  .decay(.1).sustain(0).release(.05)
+  .gain(.2)
+  .lpf(2500)
+  .room(.15)
+  .degradeBy(.2)
+
+// === AROUND THE WORLD: hypnotic, notes dropping out ===
+let hypno = note("c3").struct("1 1 1 ~ 1 1 ~ 1")
+  .s("square")
+  .decay(.15).sustain(.05).release(.08)
+  .gain(.15)
+  .lpf(sine.range(300, 2000).slow(16))
+  .lpq(6)
+  .shape(.15)
+  .degradeBy(.25)
+
+stack(
+  kick,
+  clap,
+  hats,
+  hat16,
+  bass,
+  chords,
+  vocoder,
+  stab,
+  hypno
+)
