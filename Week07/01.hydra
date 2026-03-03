@@ -1,0 +1,7 @@
+// Patch 1: Digital Rain Variation
+noise(10, 0.5)
+  .color(0.1, 1.5, 0.2) // Green tint
+  .pixelate(50, 50)
+  .modulate(noise(2), 0.2)
+  .add(src(o0).scrollY(0.02), 0.9) // Vertical scroll
+  .out().
