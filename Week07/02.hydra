@@ -1,0 +1,17 @@
+// Patch 2: The Green Wall (the-wall variation by Alexander Rangel)
+speed = 0.05
+osc(48, -0.1, 0)
+  .thresh([0.3, 0.7].fast(0.75), 0)
+  .color(0, 1, 0) // Pure Green
+  .add(
+    osc(28, 0.1, 0)
+      .thresh([0.3, 0.7].fast(0.75), 0)
+      .rotate(Math.PI / 4)
+      .color(0, 0.5, 0) // Darker Green for depth
+      .modulateScale(osc(64, -0.01, 0).thresh([0.3, 0.7].fast(0.75), 0))
+  )
+  .pixelate(64, 64)
+  .scrollX(0, 0.1)
+  .modulateRotate(osc(54, -0.005, 0).thresh([0.3, 0.7].fast(0.25), 0))
+  .scale(1.5)
+  .out()
