@@ -1,0 +1,32 @@
+//Three.js Basic Example by mr.doob and Flor de Fuego
+const THREE = await import("https://unpkg.com/three@0.163.0/build/three.module.js")
+
+scene = new THREE.Scene()
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+
+renderer = new THREE.WebGLRenderer({alpha:true}) //Three.js background transparent
+renderer.setSize(width, height)
+geometry = new THREE.IcosahedronGeometry();
+// material = new THREE.MeshNormalMaterial() old line
+material = new THREE.MeshNormalMaterial({ wireframe: true }); // new line, retro look
+icosahedron = new THREE.Mesh(geometry, material);
+scene.add(icosahedron)
+camera.position.z = 1.8
+
+// 'update' is a reserved function that will be run every time the main hydra rendering context is updated
+update = () => {
+	
+	icosahedron.rotation.x += 0.01;
+	icosahedron.rotation.y += 0.01;
+  	icosahedron.scale.set(mouse.x/innerWidth,mouse.y/innerHeight,1) //resize x & y with Hydra mouse.x and mouse.y function
+	renderer.render(scene, camera);
+}
+
+s0.init({
+	src: renderer.domElement
+})
+
+src(o0)
+	.layer(src(s0).hue(()=>time*0.2))
+	.out()
+
