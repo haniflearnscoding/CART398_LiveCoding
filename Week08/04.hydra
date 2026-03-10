@@ -1,0 +1,23 @@
+osc(30, 0, 1)
+  .thresh(0.7)
+  .luma()
+  .repeat(2, 2)
+  .modulate(osc(10, 1), 0.03)
+  .color(1, 0, 0) // Red
+  .layer(
+    osc(30, 0, 1)
+      .thresh(0.7)
+      .luma()
+      .repeat(2, 2)
+      .modulate(osc(10, 1), 0.06)
+      .color(0, 1, 0) // Green
+  )
+  .layer(
+    osc(30, 0, 1)
+      .thresh(0.7)
+      .luma()
+      .repeat(2, 2)
+      .modulate(osc(10, 1), 0.09)
+      .color(0, 0, 1) // Blue
+  )
+  .out()
