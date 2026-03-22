@@ -1,0 +1,30 @@
+const THREE = await import("https://unpkg.com/three@0.163.0/build/three.module.js")
+
+scene = new THREE.Scene()
+camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+renderer = new THREE.WebGLRenderer({ alpha: false })
+renderer.setClearColor(0x000000, 1)
+renderer.setSize(width, height)
+
+geometry = new THREE.TorusKnotGeometry(0.6, 0.2, 100, 16)
+material = new THREE.MeshNormalMaterial({ wireframe: true })
+knot = new THREE.Mesh(geometry, material)
+scene.add(knot)
+
+camera.position.z = 1.8
+
+update = () => {
+  knot.rotation.x += 0.005
+  knot.rotation.y += 0.008
+  knot.scale.set(a.fft[0] * 2, mouse.y / innerHeight, 1)
+  renderer.render(scene, camera)
+}
+
+s0.init({ src: renderer.domElement })
+
+src(s0)
+  .pixelate(40, 40)
+  .posterize(6)
+  .contrast(1.8)
+  .saturate(1.6)
+  .out()
