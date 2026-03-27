@@ -1,0 +1,20 @@
+spd = 0.3
+kali = 6
+px = 20
+sat = 1.5
+fb = 0.4
+mod = 0.3
+
+osc(10, 0.1, 1.5)
+  .color(1.2, 0.8, 0.8)
+  .rotate(() => time * spd)
+  .modulate(noise(3, 0.2).scale(() => 1 + a.fft[0] * 3), () => a.fft[1] * mod)
+  .kaleid(() => kali)
+  .pixelate(() => px + a.fft[0] * 40, () => px + a.fft[0] * 80)
+  .posterize(6).contrast(1.8).saturate(() => sat)
+  .blend(src(o0), () => fb)
+  .out(o0)
+
+// 0-3 audio reactivity, maybe color change
+// 3-6 push kali and spd, maybe fb
+// 6-9 osc freq change  push this as variation of 01.hydra
